@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=Roboto:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Roboto:wght@300;400&display=swap');
 
 /* Brand Guidelines Implementation - Dark Mode Variant */
 :root {
@@ -11,8 +11,8 @@
     --color-text-secondary: #B0B0B0;
 
     /* Font Assignments */
-    --font-heading: 'Inter', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    --font-heading: 'Open Sans', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
 
     /* Layout */
     --transition: all 0.3s ease;
@@ -48,7 +48,7 @@ h5,
 h6 {
     font-family: var(--font-heading);
     color: var(--color-text-main);
-    font-weight: 200;
+    font-weight: 300;
     letter-spacing: -0.02em;
 }
 
