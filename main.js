@@ -50,4 +50,61 @@ document.addEventListener('DOMContentLoaded', () => {
         section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
         observer.observe(section);
     });
+
+
+    // Lightbox Logic
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const captionText = document.getElementById('caption');
+    const closeBtn = document.querySelector('.lightbox-close');
+
+    // Open Lightbox
+    document.querySelectorAll('.project-image img').forEach(img => {
+        img.addEventListener('click', function () {
+            lightbox.classList.add('active');
+            lightboxImg.src = this.src; // Use the same image source
+
+            // Try to find a title/description in the parent project-card
+            const projectCard = this.closest('.project-card');
+            if (projectCard) {
+                const title = projectCard.querySelector('h3')?.innerText || '';
+                const desc = projectCard.querySelector('p')?.innerText || '';
+                captionText.innerText = title + (desc ? " - " + desc : "");
+            } else {
+                captionText.innerText = this.alt;
+            }
+
+            document.body.style.overflow = 'hidden'; // Disable scroll
+        });
+    });
+
+    // Close Lightbox functions
+    const closeLightbox = () => {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto'; // Re-enable scroll
+        setTimeout(() => {
+            lightbox.style.display = ''; // Reset display style if needed by class toggle removal issues, though logic handles it via css
+        }, 300);
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeLightbox);
+    }
+
+    // Close on click outside
+    if (lightbox) {
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
+
 });
